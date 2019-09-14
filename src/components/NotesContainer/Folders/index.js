@@ -16,10 +16,11 @@ export default class Folders extends React.Component {
                   className="Note__delete"
                   type="button"
                   onClick={() => context.deleteFolder(folder)}
-                > handle folder delete </button>
+                >  Delete Folder</button>
                 {context.notes.filter(note => note.folderId === folder.id).length}
               </ListGroupItem>
-            ));
+            )
+            )  
           }}
         </MyContext.Consumer>
       </ListGroup>

@@ -2,20 +2,12 @@ import React from 'react'
 import MyContext from "../MyContext";
 
 export default class AddFolder extends React.Component {
-    // static defaultProps = {
-    //   addFolder: () => {},
-    // }
-    // static contextType = ApiContext;
-    //
+  
     handleAddFolder = (event, context) => {
       event.preventDefault();
       const newFolder = {
         name: event.target.name.value
       };
-      // const newFolder = {};
-      // newFolder.name = event.target.name.value;
-      // const folderId = this.props.id;
-      //
       fetch(`http://localhost:9090/folders`, {
         method: 'POST',
         headers: {
@@ -32,10 +24,6 @@ export default class AddFolder extends React.Component {
         console.log(resp)
         console.log(context)
         context.addFolder(resp);
-        // folders.push(resp);
-        // updateContextWithNewFolder()
-        // this.props.addFolder(folderId, newFolder)
-        // this.props.history.push('/');
       })
       .catch(error => {
         console.error({ error })
@@ -43,11 +31,6 @@ export default class AddFolder extends React.Component {
     }
 
     render() {
-      // const { notes, folders, } = this.context
-      // const { noteId } = this.props.match.params
-      // const note = findNote(notes, noteId) || {}
-      // const folder = findFolder(folders, note.folderId)
-
         return (
           <MyContext.Consumer>
             {(context) => (
