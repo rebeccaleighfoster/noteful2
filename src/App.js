@@ -118,11 +118,6 @@ class App extends React.Component {
   };
 
   addNote = newNote => {
-    // const { folders, /*notes*/ } = this.state;
-    // folders.push(newFolder)
-    // this.setState({
-    //   folders
-    // })
   };
 
   render() {
