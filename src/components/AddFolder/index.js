@@ -1,5 +1,6 @@
 import React from 'react'
 import MyContext from "../MyContext";
+import { Link } from "react-router-dom";
 
 export default class AddFolder extends React.Component {
   
@@ -45,6 +46,11 @@ export default class AddFolder extends React.Component {
                           Save
                       </button>
                   </div>
+                  <div>
+                      <Link to={`/`}>
+                        back
+                      </Link>
+                    </div>
               </form>
             )}
         </MyContext.Consumer>

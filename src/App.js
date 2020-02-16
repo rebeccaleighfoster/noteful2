@@ -118,6 +118,12 @@ class App extends React.Component {
   };
 
   addNote = newNote => {
+    console.log(newNote);
+    const { notes } = this.state;
+    notes.push(newNote);
+    this.setState({
+      notes
+    });
   };
 
   render() {

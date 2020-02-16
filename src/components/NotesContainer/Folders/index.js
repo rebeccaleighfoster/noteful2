@@ -16,8 +16,8 @@ export default class Folders extends React.Component {
                   className="Note__delete"
                   type="button"
                   onClick={() => context.deleteFolder(folder)}
-                >  Delete Folder</button>
-                {context.notes.filter(note => note.folderId === folder.id).length}
+                >  Delete Folder</button>  
+                  number of notes in folder: {context.notes.filter(note => note.folderId === folder.id).length}
               </ListGroupItem>
             )
             )  

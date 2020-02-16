@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 
 import MyContext from "../MyContext";
 
@@ -49,6 +50,13 @@ export default class AddNote extends React.Component {
                       <button type="submit" className="buttonSubmit">
                           Save
                       </button>
+                  </div>
+                  <div className="backButton">
+                    <div>
+                      <Link to={`/`}>
+                        back
+                      </Link>
+                    </div>
                   </div>
               </form>
             )}

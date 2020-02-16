@@ -1,6 +1,7 @@
 import React from "react";
 import MyContext from "./MyContext";
 import { ListGroup } from 'reactstrap';
+import { Link } from "react-router-dom";
 
 const NoteInfo = props => {
   console.log(props)
@@ -15,6 +16,13 @@ return (
               <>
                 <div>{note.name}</div>
                 <div> {note.content}</div>
+                <div className="backButton">
+                    <div>
+                      <Link to={`/`}>
+                        back
+                      </Link>
+                    </div>
+                  </div>
               </>
               );
         }}
