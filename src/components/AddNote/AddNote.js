@@ -33,36 +33,47 @@ export default class AddNote extends React.Component {
     }
 
     render() {
-        return (
-          <MyContext.Consumer>
-            {(context) => (
-              <form className="createNote" onSubmit={(e) => this.handleAddNote(e, context)}>
-                  <h2>Add Note</h2>
-                  <div className="form-group">
-                      <label htmlFor="name">Name: </label>
-                      <input type="text" className="name" name="name" id="name" />
+      return (
+        <MyContext.Consumer>
+          {(context) => (
+         //   const myFolders = folders.map((folder, index) => <option key={index} value={folder.id}>{folder.name} </option>)
+            <form className="createNote" onSubmit={(e) => this.handleAddNote(e, context)}>
+                Add Note
+                <div className="form-group">
+                          <label htmlFor="folderSelect">Folder Select</label>
+                          <select 
+                              className="folderSelect"
+                              aria-label="select folder" 
+                              name="folder">
+                            {/* myFolders */}
+                          </select>
+                      </div>
+                <div className="form-group">
+                    <label htmlFor="name">Name: </label>
+                    <input type="text" className="name" name="name" id="name" required />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="content"> Content: </label> 
+                  <input type="text" className="content" name="content" id="content" required/>
+                </div>
+                <div className="createNoteButtons">
+                    <button type="submit" className="buttonSubmit">
+                        Save
+                    </button>
+                </div>
+                <div className="backButton">
+                  <div>
+                    <Link to={`/`}>
+                      back
+                    </Link>
                   </div>
-                  <div className="form-group">
-                    <label htmlFor="content"> Content: </label> 
-                    <input type="text" className="content" name="content" id="content" />
-                  </div>
-                  <div className="createNoteButtons">
-                      <button type="submit" className="buttonSubmit">
-                          Save
-                      </button>
-                  </div>
-                  <div className="backButton">
-                    <div>
-                      <Link to={`/`}>
-                        back
-                      </Link>
-                    </div>
-                  </div>
-              </form>
-            )}
-        </MyContext.Consumer>
-      );
-    }
-}
-
+                </div>
+                
+            </form>
+          )}
+    
+      </MyContext.Consumer>
+          )
+          }
+        }
 

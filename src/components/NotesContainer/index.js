@@ -74,7 +74,7 @@ class NotesContainer extends React.Component {
   }
 
   NotesContainer.propTypes = {
-    value: PropTypes.string
+    value: PropTypes.string.isRequired
   }
 
   export default NotesContainer;

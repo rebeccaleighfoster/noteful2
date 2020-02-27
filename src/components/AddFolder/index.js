@@ -39,7 +39,7 @@ export default class AddFolder extends React.Component {
                   <h2>Add Folder</h2>
                   <div className="form-group">
                       <label htmlFor="name">Name</label>
-                      <input type="text" className="name" name="name" id="name" />
+                      <input type="text" className="name" name="name" id="name" required />
                   </div>
                   <div className="createFolderButtons">
                       <button type="submit" className="buttonSubmit">

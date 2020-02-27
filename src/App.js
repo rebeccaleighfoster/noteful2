@@ -152,3 +152,13 @@ class App extends React.Component {
 }
 
 export default App;
+
+
+/*
+
+Add an error message for when users try to save notes or folders without the required inputs. If I'm a user and I can't save, I want to know why.
+When I'm adding a new note, I should be able to select the folder that the note is supposed to be associated with.
+You should add isRequired to any propType that is required. From the rubric:
+Any piece of data that is required such as the name and note for the AddNote form should have prop types with the isRequired validator
+
+*/
