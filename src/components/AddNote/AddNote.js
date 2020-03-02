@@ -8,7 +8,8 @@ export default class AddNote extends React.Component {
       event.preventDefault();
       const newNote = {
         name: event.target.name.value,
-        content: event.target.content.value
+        content: event.target.content.value,
+        folderId: event.target.folder.value
       };
       fetch(`http://localhost:9090/notes`, {
         method: 'POST',
@@ -33,10 +34,9 @@ export default class AddNote extends React.Component {
     }
 
     render() {
-      return (
+        return (
         <MyContext.Consumer>
           {(context) => (
-         //   const myFolders = folders.map((folder, index) => <option key={index} value={folder.id}>{folder.name} </option>)
             <form className="createNote" onSubmit={(e) => this.handleAddNote(e, context)}>
                 Add Note
                 <div className="form-group">
@@ -45,7 +45,7 @@ export default class AddNote extends React.Component {
                               className="folderSelect"
                               aria-label="select folder" 
                               name="folder">
-                            {/* myFolders */}
+                            { context.folders.map(folder => <option value={folder.id}> { folder.name } </option>) }
                           </select>
                       </div>
                 <div className="form-group">
@@ -68,12 +68,11 @@ export default class AddNote extends React.Component {
                     </Link>
                   </div>
                 </div>
-                
             </form>
           )}
     
       </MyContext.Consumer>
-          )
-          }
+         )
         }
+       }
 
