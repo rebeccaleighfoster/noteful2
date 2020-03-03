@@ -23,6 +23,7 @@ class NotesContainer extends React.Component {
     };
     render() {
       const folderId = this.props.match.params.id || null;
+      const timestamp = Date.now();
       return (
         <ErrorBoundary>
         <MyContext.Consumer>
@@ -33,7 +34,7 @@ class NotesContainer extends React.Component {
                 <ListGroupItem>
                 <Link to="/folder/add">
                         <button type="button">
-                          Add folder!
+                          Add Folder
                          </button>
                           </Link>
                 </ListGroupItem>
@@ -48,6 +49,7 @@ class NotesContainer extends React.Component {
                         <div key={note.id}>
                           <Link to={`/note/${note.id}`}>{note.name}</Link>
                         </div>
+                        <div> {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(timestamp)} </div>
                         <button
                           className='Note__delete'
                           type='button'
@@ -58,7 +60,7 @@ class NotesContainer extends React.Component {
                       <ListGroupItem>
                       <Link to="/notes/add">
                         <button type="button">
-                          Add Note!
+                          Add Note
                          </button>
                           </Link>
                         </ListGroupItem>
