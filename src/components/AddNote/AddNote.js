@@ -59,16 +59,16 @@ export default class AddNote extends React.Component {
                 </div>
                 <div className="createNoteButtons">
                     <button type="submit" className="buttonSubmit">
-                    <Link to={`/`}>
+   
                       Save
-                    </Link>
+
                     </button>
                 </div>
                 <div className="backButton">
                   <div>
                     <button>
                     <Link to={`/`}>
-                      back
+                      Back
                     </Link>
                     </button>
                   </div>
