@@ -28,6 +28,7 @@ export default class AddNote extends React.Component {
         console.log(context)
         context.addNote(resp);
         console.log('new note:', newNote)
+         this.props.history.goBack()
       })
       .catch(error => {
         console.error({ error })
@@ -58,7 +59,7 @@ export default class AddNote extends React.Component {
                   <input type="text" className="content" name="content" id="content" required/>
                 </div>
                 <div className="createNoteButtons">
-                    <button type="submit" className="buttonSubmit" onClick={() => this.props.history.goBack()}>
+                    <button type="submit" className="buttonSubmit" >
                       Save
                     </button>
                 </div>
