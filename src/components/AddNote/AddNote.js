@@ -58,10 +58,8 @@ export default class AddNote extends React.Component {
                   <input type="text" className="content" name="content" id="content" required/>
                 </div>
                 <div className="createNoteButtons">
-                    <button type="submit" className="buttonSubmit">
-   
+                    <button type="submit" className="buttonSubmit" onClick={() => this.props.history.goBack()}>
                       Save
-
                     </button>
                 </div>
                 <div className="backButton">
