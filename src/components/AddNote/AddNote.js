@@ -27,6 +27,7 @@ export default class AddNote extends React.Component {
         console.log(resp)
         console.log(context)
         context.addNote(resp);
+        console.log('new note:', newNote)
       })
       .catch(error => {
         console.error({ error })
