@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-
+import PropTypes from 'prop-types';
 import MyContext from "../MyContext";
 
 export default class AddNote extends React.Component {
@@ -78,4 +78,3 @@ export default class AddNote extends React.Component {
          )
         }
        }
-

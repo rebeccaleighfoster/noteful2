@@ -13,7 +13,7 @@ export default class Folders extends React.Component {
             return context.folders.map(folder => (
                 <ListGroupItem key={folder.name}>
                   <div>
-                <Link to={`/folder/${folder.id}`}>{folder.name}</Link>
+                <Link to={`/folder/${folder.id}`}>{folder.name} </Link>
                 </div>
                 <button
                   className="Note__delete"

@@ -42,6 +42,9 @@ class NotesContainer extends React.Component {
               <div className="notes-pane">
                 {folderId ? (<div>
                   {this.filterByFolderId(context.notes, folderId)}
+                  <Link to={`/`}>
+                          <button type="button">Back!</button>
+                  </Link>
                 </div>) : (
                   <ListGroup>
                     {context.notes.map(note =>
@@ -76,7 +79,7 @@ class NotesContainer extends React.Component {
   }
 
   NotesContainer.propTypes = {
-    value: PropTypes.string
+    value: PropTypes.string.isRequired
   }
 
   export default NotesContainer;
