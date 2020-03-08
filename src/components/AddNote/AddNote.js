@@ -7,11 +7,14 @@ export default class AddNote extends React.Component {
     handleAddNote = (event, context) => {
       event.preventDefault();
       const newNote = {
+        //id
         name: event.target.name.value,
         content: event.target.content.value,
+        //date created
+        //modified
         folderId: event.target.folder.value
       };
-      fetch(`http://localhost:9090/notes`, {
+      fetch(`http://localhost:8000/notes`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
@@ -28,7 +31,7 @@ export default class AddNote extends React.Component {
         console.log(context)
         context.addNote(resp);
         console.log('new note:', newNote)
-         this.props.history.goBack()
+        this.props.history.goBack()
       })
       .catch(error => {
         console.error({ error })

@@ -8,8 +8,9 @@ export default class AddFolder extends React.Component {
       event.preventDefault();
       const newFolder = {
         name: event.target.name.value
+        // add a new id here to match the table??
       };
-      fetch(`http://localhost:9090/folders`, {
+      fetch(`http://localhost:8000/folders`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
