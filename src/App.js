@@ -58,7 +58,7 @@ class App extends React.Component {
 
   handleNoteDelete = (note) => {
     const noteId = note.id;
-    fetch(`http://localhost:9090/notes/${noteId}`, {
+    fetch(`http://localhost:8000/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -70,6 +70,7 @@ class App extends React.Component {
         return res.json()
       })
       .then(() => {
+        console.log(note, "deleted")
         this.setState(prevState => ({
           notes: prevState.notes.filter(note => !(note.id === noteId))
         }))
@@ -81,7 +82,7 @@ class App extends React.Component {
 
   handleFolderDelete = deletedFolder => {
     const { folders, notes } = this.state;
-    fetch(`http://localhost:9090/folders/${deletedFolder.id}`, {
+    fetch(`http://localhost:8000/folders/${deletedFolder.id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json"

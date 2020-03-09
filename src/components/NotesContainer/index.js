@@ -22,7 +22,7 @@ class NotesContainer extends React.Component {
       });
     };
     render() {
-      const folderId = this.props.match.params.id || null;
+      const folderId = this.props.match.params.id || null; //why is this working??? 
       const timestamp = Date.now();
       return (
         <ErrorBoundary>
@@ -43,14 +43,14 @@ class NotesContainer extends React.Component {
                 {folderId ? (<div>
                   {this.filterByFolderId(context.notes, folderId)}
                   <Link to={`/`}>
-                          <button type="button">Back!</button>
+                          <button type="button">Back</button>
                   </Link>
                 </div>) : (
                   <ListGroup>
                     {context.notes.map(note =>
                       <ListGroupItem key={note.id}>
                         <div key={note.id}>
-                          <Link to={`/note/${note.id}`}>{note.name}</Link>
+                          <Link to={`/note/${note.id}`}>{note.note_name}</Link>
                         </div>
                         <div> {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(timestamp)} </div>
                         <button

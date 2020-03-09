@@ -7,8 +7,7 @@ export default class AddFolder extends React.Component {
     handleAddFolder = (event, context) => {
       event.preventDefault();
       const newFolder = {
-        name: event.target.name.value
-        // add a new id here to match the table??
+        folder_name: event.target.name.value
       };
       fetch(`http://localhost:8000/folders`, {
         method: 'POST',
@@ -29,7 +28,7 @@ export default class AddFolder extends React.Component {
       })
       .catch(error => {
         console.error({ error })
-      });
+      }); 
     }
 
     render() {

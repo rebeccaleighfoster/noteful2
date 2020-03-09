@@ -1,18 +1,14 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
 import MyContext from "../MyContext";
 
 export default class AddNote extends React.Component {
     handleAddNote = (event, context) => {
       event.preventDefault();
       const newNote = {
-        //id
-        name: event.target.name.value,
+        note_name: event.target.name.value,
         content: event.target.content.value,
-        //date created
-        //modified
-        folderId: event.target.folder.value
+        folder_id: event.target.folder.value
       };
       fetch(`http://localhost:8000/notes`, {
         method: 'POST',
