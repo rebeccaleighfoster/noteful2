@@ -14,40 +14,52 @@ class App extends React.Component {
     super(props);
     this.state = {
       folders: [],
-      notes: []
+      notes: [],
+      folder_id: null
     };
   }
 
-  filterByFolderId = (notes, folderId) => {
-    return notes.map(note => {
-      if (note.folderId === folderId) {
-        return (
-          <div>
-            <Link to={`/note/${note.id}`} key={note.id}>
-              {note.name}
-            </Link>
-          </div>
-        );
-      }
-      return null;
+  setFolderId = (folder_id) => {
+    console.log(folder_id)
+    this.setState({
+      folder_id
+    }, () => {
+      this.fetchNotesByFolderId()
     });
   };
 
   componentDidMount() {
-    Promise.all([
-      fetch(`http://localhost:8000/notes`),
-      fetch(`http://localhost:8000/folders`)
-    ])
-      .then(([notesResponse, foldersResponse]) => {
-        if (!notesResponse.ok)
-          return notesResponse.json().then(e => Promise.reject(e));
+   this.fetchFolders();
+   this.fetchNotesByFolderId();
+  }
+
+  fetchNotesByFolderId = () => {
+    const { folder_id } = this.state;
+    const url = folder_id ? `/folder/${folder_id}` : ``;
+    fetch(`http://localhost:8000/notes${url}`)
+      .then((resp) => {
+        if (!resp.ok)
+          return resp.json().then(e => Promise.reject(e));
+        return resp.json();
+      }).then(data => {
+        this.setState({
+          notes: data
+        })
+      })
+      .catch(error => {
+        console.error({ error });
+      });
+  }
+
+  fetchFolders = () => {
+    fetch(`http://localhost:8000/folders`)
+      .then((foldersResponse) => {
         if (!foldersResponse.ok)
           return foldersResponse.json().then(e => Promise.reject(e));
-        return Promise.all([notesResponse.json(), foldersResponse.json()]);
+        return foldersResponse.json();
       })
-      .then(([notes, folders]) => {
+      .then((folders) => {
         this.setState({
-          notes,
           folders
         });
       })
@@ -65,49 +77,36 @@ class App extends React.Component {
       },
     })
       .then(res => {
-        if (!res.ok)
-          return res.json().then(e => Promise.reject(e))
-        return res.json()
-      })
-      .then(() => {
-        console.log(note, "deleted")
-        this.setState(prevState => ({
-          notes: prevState.notes.filter(note => !(note.id === noteId))
-        }))
+        if (res.ok){
+          this.fetchFolders();
+          this.fetchNotesByFolderId()
+        }
       })
       .catch(error => {
         console.error({ error })
       })
   };
 
-  handleFolderDelete = deletedFolder => {
-    const { folders, notes } = this.state;
-    fetch(`http://localhost:8000/folders/${deletedFolder.id}`, {
-      method: "DELETE",
+
+  handleFolderDelete = (folder) => {
+    const folder_id = folder.id;
+    console.log ({folder_id}, "deleted")
+    fetch(`http://localhost:8000/notes/${folder_id}`, {
+      method: 'DELETE',
       headers: {
-        "content-type": "application/json"
+        'content-type': 'application/json'
+      },
+    })
+    .then(res => {
+      if (res.ok){
+        this.fetchFolders();
+        this.fetchNotesByFolderId()
       }
     })
-      .then(res => {
-        if (!res.ok) return res.json().then(e => Promise.reject(e));
-        return res.json();
-      })
-      .then(() => {
-        const newFolderSet = folders.filter(
-          folderObj => !(folderObj.id === deletedFolder.id)
-        );
-        const newNoteSet = notes.filter(
-          noteObj => !(noteObj.folderId === deletedFolder.id)
-        );
-        this.setState({
-          folders: newFolderSet,
-          notes: newNoteSet
-        });
-      })
-      .catch(error => {
-        console.error({ error });
-      });
-  };
+    .catch(error => {
+      console.error({ error })
+    })
+};
 
   addFolder = newFolder => {
     console.log(newFolder);
@@ -137,7 +136,8 @@ class App extends React.Component {
           addFolder: this.addFolder,
           addNote: this.addNote,
           deleteNote: this.handleNoteDelete,
-          deleteFolder: this.handleFolderDelete
+          deleteFolder: this.handleFolderDelete,
+          setFolderId: this.setFolderId
         }}
       >
         <Router>

@@ -38,6 +38,7 @@ export default class AddNote extends React.Component {
         return (
         <MyContext.Consumer>
           {(context) => (
+            console.log("Add note!", context),
             <form className="createNote" onSubmit={(e) => this.handleAddNote(e, context)}>
                 Add Note
                 <div className="form-group">
