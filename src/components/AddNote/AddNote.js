@@ -26,8 +26,9 @@ export default class AddNote extends React.Component {
         console.log(resp)
         console.log(context)
         context.addNote(resp);
-        console.log('new note:', newNote)
-        this.props.history.goBack()
+        console.log('new note:', newNote);
+        this.context.history.push.goBack();
+       // window.location.reload() i know this is wrong but i dont know what to put here to make the page reload and go back. 
       })
       .catch(error => {
         console.error({ error })
@@ -38,7 +39,7 @@ export default class AddNote extends React.Component {
         return (
         <MyContext.Consumer>
           {(context) => (
-            console.log("Add note!", context),
+            console.log("from addnote", context),
             <form className="createNote" onSubmit={(e) => this.handleAddNote(e, context)}>
                 Add Note
                 <div className="form-group">
@@ -51,7 +52,7 @@ export default class AddNote extends React.Component {
                           </select>
                       </div>
                 <div className="form-group">
-                    <label htmlFor="name">Name: </label>
+                    <label htmlFor="name">Name: {context.note_name} </label>
                     <input type="text" className="name" name="name" id="name" required />
                 </div>
                 <div className="form-group">
@@ -59,8 +60,8 @@ export default class AddNote extends React.Component {
                   <input type="text" className="content" name="content" id="content" required/>
                 </div>
                 <div className="createNoteButtons">
-                    <button type="submit" className="buttonSubmit" >
-                      Save
+                    <button type="submit" className="buttonSubmit">
+                   SAVE
                     </button>
                 </div>
                 <div className="backButton">
