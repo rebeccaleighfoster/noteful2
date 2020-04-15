@@ -2,6 +2,7 @@
   "name": "noteful",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://rebeccas-noteful-server.herokuapp.com/",
   "dependencies": {
     "bootstrap": "^4.3.1",
     "moment": "^2.24.0",
@@ -14,11 +15,15 @@
     "react-timestamp": "^5.1.0",
     "reactstrap": "^8.0.1"
   },
-  "scripts": {
+"scripts": {
     "start": "react-scripts start",
+    "prebuild": "CI=true react-scripts test --colors",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "now --prod ./build",
+    "postdeploy": "now alias -A ./build/now.json"
   },
   "eslintConfig": {
     "extends": "react-app"

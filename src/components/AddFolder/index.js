@@ -3,13 +3,12 @@ import MyContext from "../MyContext";
 import { Link } from "react-router-dom";
 
 export default class AddFolder extends React.Component {
-  
     handleAddFolder = (event, context) => {
       event.preventDefault();
       const newFolder = {
         folder_name: event.target.name.value
       };
-      fetch(`http://localhost:8000/folders`, {
+      fetch(`/folders`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
@@ -24,7 +23,7 @@ export default class AddFolder extends React.Component {
       .then((resp) => {
         console.log(resp)
         console.log(context)
-        context.addFolder(resp);
+        window.location.href= '/'
       })
       .catch(error => {
         console.error({ error })

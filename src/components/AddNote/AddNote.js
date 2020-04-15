@@ -10,7 +10,8 @@ export default class AddNote extends React.Component {
         content: event.target.content.value,
         folder_id: event.target.folder.value
       };
-      fetch(`http://localhost:8000/notes`, {
+      console.log(newNote)
+      fetch(`/notes`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
@@ -25,10 +26,8 @@ export default class AddNote extends React.Component {
       .then((resp) => {
         console.log(resp)
         console.log(context)
-        context.addNote(resp);
-        console.log('new note:', newNote);
-        this.context.history.push.goBack();
-       // window.location.reload() i know this is wrong but i dont know what to put here to make the page reload and go back. 
+        window.location.href = '/'
+
       })
       .catch(error => {
         console.error({ error })

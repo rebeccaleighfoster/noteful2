@@ -9,7 +9,7 @@ export default class Folders extends React.Component {
       <ListGroup>
         <MyContext.Consumer>
           {context => {
-            console.log(context, /*folder*/)
+            console.log(context)
             return context.folders.map(folder => (
                 <ListGroupItem key={folder.name}>
                   <div>

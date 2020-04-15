@@ -1,12 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Link } from "react-router-dom";
 import NotesContainer from "./components/NotesContainer";
 import NoteInfo from "./components/NoteInfo";
 import AddFolder from "./components/AddFolder";
 import MyContext from "./components/MyContext";
 import AddNote from "./components/AddNote/AddNote"
-
+//import config from './config';
 import "./App.css";
 
 class App extends React.Component {
@@ -36,7 +35,7 @@ class App extends React.Component {
   fetchNotesByFolderId = () => {
     const { folder_id } = this.state;
     const url = folder_id ? `/folder/${folder_id}` : ``;
-    fetch(`http://localhost:8000/notes${url}`)
+    fetch(`/notes${url}`)
       .then((resp) => {
         if (!resp.ok)
           return resp.json().then(e => Promise.reject(e));
@@ -52,7 +51,7 @@ class App extends React.Component {
   }
 
   fetchFolders = () => {
-    fetch(`http://localhost:8000/folders`)
+    fetch(`/folders`)
       .then((foldersResponse) => {
         if (!foldersResponse.ok)
           return foldersResponse.json().then(e => Promise.reject(e));
@@ -70,7 +69,7 @@ class App extends React.Component {
 
   handleNoteDelete = (note) => {
     const noteId = note.id;
-    fetch(`http://localhost:8000/notes/${noteId}`, {
+    fetch(`/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -91,7 +90,7 @@ class App extends React.Component {
   handleFolderDelete = (folder) => {
     const folder_id = folder.id;
     console.log ({folder_id}, "deleted")
-    fetch(`http://localhost:8000/notes/${folder_id}`, {
+    fetch(`folders/${folder_id}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -108,23 +107,7 @@ class App extends React.Component {
     })
 };
 
-  addFolder = newFolder => {
-    console.log(newFolder);
-    const { folders } = this.state;
-    folders.push(newFolder);
-    this.setState({
-      folders
-    });
-  };
-
-  addNote = newNote => {
-    console.log(newNote);
-    const { notes } = this.state;
-    notes.push(newNote);
-    this.setState({
-      notes
-    });
-  };
+  
 
   render() {
     const { folders, notes } = this.state;
@@ -133,8 +116,6 @@ class App extends React.Component {
         value={{
           notes,
           folders,
-          addFolder: this.addFolder,
-          addNote: this.addNote,
           deleteNote: this.handleNoteDelete,
           deleteFolder: this.handleFolderDelete,
           setFolderId: this.setFolderId
