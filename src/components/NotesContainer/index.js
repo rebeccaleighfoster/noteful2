@@ -3,8 +3,8 @@ import Folders from "./Folders";
 import { Link } from "react-router-dom";
 import MyContext from "../MyContext"
 import PropTypes from "prop-types";
-import { ListGroup, ListGroupItem } from 'reactstrap';
 import ErrorBoundary from '../ErrorBoundary';
+
 
 class NotesContainer extends React.Component {
   static contextType = MyContext;
@@ -21,18 +21,18 @@ class NotesContainer extends React.Component {
             <div className="d-flex">
               <div className="folders-pane">
                 <Folders />
-                <ListGroupItem>
+                <div>
                   <Link to="/folder/add">
                     <button type="button">
                       Add Folder
                          </button>
                   </Link>
-                </ListGroupItem>
+                </div>
               </div>
               <div className="notes-pane">
-                <ListGroup>
+                <div>
                   {context.notes.map(note =>
-                    <ListGroupItem key={note.id}>
+                    <div key={note.id}>
                       <div key={note.id}>
                         <Link to={`/note/${note.id}`}>{note.note_name}</Link>
                       </div>
@@ -42,16 +42,16 @@ class NotesContainer extends React.Component {
                         type='button'
                         onClick={() => context.deleteNote(note)}
                       > Delete Note </button>
-                    </ListGroupItem>
+                    </div>
                   )}
-                  <ListGroupItem>
+                  <div>
                     <Link to="/notes/add">
                       <button type="button">
                         Add Note
                          </button>
                     </Link>
-                  </ListGroupItem>
-                </ListGroup>
+                  </div>
+                </div>
               </div>
             </div>
       </ErrorBoundary>

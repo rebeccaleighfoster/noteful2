@@ -2,13 +2,15 @@ import React from 'react'
 import MyContext from "../MyContext";
 import { Link } from "react-router-dom";
 
+const { API_ENDPOINT } = require('../../config')
+
 export default class AddFolder extends React.Component {
     handleAddFolder = (event, context) => {
       event.preventDefault();
       const newFolder = {
         folder_name: event.target.name.value
       };
-      fetch(`/folders`, {
+      fetch(`${API_ENDPOINT}/folders`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json'

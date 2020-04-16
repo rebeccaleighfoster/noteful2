@@ -5,8 +5,9 @@ import NoteInfo from "./components/NoteInfo";
 import AddFolder from "./components/AddFolder";
 import MyContext from "./components/MyContext";
 import AddNote from "./components/AddNote/AddNote"
-//import config from './config';
 import "./App.css";
+
+const { API_ENDPOINT } = require('./config')
 
 class App extends React.Component {
   constructor(props) {
@@ -34,8 +35,8 @@ class App extends React.Component {
 
   fetchNotesByFolderId = () => {
     const { folder_id } = this.state;
-    const url = folder_id ? `/folder/${folder_id}` : ``;
-    fetch(`/notes${url}`)
+    const url = folder_id ? `${API_ENDPOINT}/folder/${folder_id}` : ``;
+    fetch(`${API_ENDPOINT}/notes${url}`)
       .then((resp) => {
         if (!resp.ok)
           return resp.json().then(e => Promise.reject(e));
@@ -51,7 +52,7 @@ class App extends React.Component {
   }
 
   fetchFolders = () => {
-    fetch(`/folders`)
+    fetch(`${API_ENDPOINT}/folders`)
       .then((foldersResponse) => {
         if (!foldersResponse.ok)
           return foldersResponse.json().then(e => Promise.reject(e));
@@ -69,7 +70,7 @@ class App extends React.Component {
 
   handleNoteDelete = (note) => {
     const noteId = note.id;
-    fetch(`/notes/${noteId}`, {
+    fetch(`${API_ENDPOINT}/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -90,7 +91,7 @@ class App extends React.Component {
   handleFolderDelete = (folder) => {
     const folder_id = folder.id;
     console.log ({folder_id}, "deleted")
-    fetch(`folders/${folder_id}`, {
+    fetch(`${API_ENDPOINT}folders/${folder_id}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -121,13 +122,14 @@ class App extends React.Component {
           setFolderId: this.setFolderId
         }}
       >
-        <Router>
-          <Route path="/" exact component={NotesContainer} />
+
+       { <Router>
+        <Route path="/" exact component={NotesContainer} />
           <Route path="/folder/:id" exact component={NotesContainer} />
           <Route path="/note/:noteId" exact component={NoteInfo} />
           <Route path="/folder/add" exact component={AddFolder} />
           <Route path="/notes/add" exact component={AddNote} />
-        </Router>
+       </Router>}
       </MyContext.Provider>
     );
   }

@@ -2,7 +2,7 @@ import React from "react";
 import MyContext from "./MyContext";
 import { Link } from "react-router-dom";
 
-
+const { API_ENDPOINT } = require('../config')
 
 export default class NoteInfo extends React.Component { 
   constructor(props) {
@@ -13,7 +13,7 @@ export default class NoteInfo extends React.Component {
   }
   componentDidMount(){
   const note = this.props.match.params.noteId || null;
-  fetch(`/notes/${note}`)
+  fetch(`${API_ENDPOINT}/notes/${note}`)
 
     .then(res => res.json())
     .then(res => {

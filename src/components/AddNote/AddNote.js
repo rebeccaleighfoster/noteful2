@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import MyContext from "../MyContext";
 
+const { API_ENDPOINT } = require('../../config')
+
 export default class AddNote extends React.Component {
     handleAddNote = (event, context) => {
       event.preventDefault();
@@ -11,7 +13,7 @@ export default class AddNote extends React.Component {
         folder_id: event.target.folder.value
       };
       console.log(newNote)
-      fetch(`/notes`, {
+      fetch(`${API_ENDPOINT}/notes`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
