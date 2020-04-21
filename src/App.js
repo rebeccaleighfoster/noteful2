@@ -91,7 +91,7 @@ class App extends React.Component {
   handleFolderDelete = (folder) => {
     const folder_id = folder.id;
     console.log ({folder_id}, "deleted")
-    fetch(`${API_ENDPOINT}folders/${folder_id}`, {
+    fetch(`${API_ENDPOINT}/folders/${folder_id}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
