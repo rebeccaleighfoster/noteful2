@@ -5,7 +5,6 @@ import MyContext from "../MyContext"
 import PropTypes from "prop-types";
 import ErrorBoundary from '../ErrorBoundary';
 
-
 class NotesContainer extends React.Component {
   static contextType = MyContext;
   componentDidUpdate(prevProps) {
@@ -14,10 +13,13 @@ class NotesContainer extends React.Component {
     }
   }
   render() {
-    const timestamp = Date.now();
     const { context } = this;
+    console.log("from", context)
     return (
       <ErrorBoundary>
+        <Link to={`/`}>
+            <h3>Noteful Home</h3>
+          </Link>
             <div className="d-flex">
               <div className="folders-pane">
                 <Folders />
@@ -36,7 +38,7 @@ class NotesContainer extends React.Component {
                       <div key={note.id}>
                         <Link to={`/note/${note.id}`}>{note.note_name}</Link>
                       </div>
-                      <div> {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(timestamp)} </div>
+                      <p>{note.date_created}</p>
                       <button
                         className='Note__delete'
                         type='button'

@@ -4,7 +4,8 @@ import NotesContainer from "./components/NotesContainer";
 import NoteInfo from "./components/NoteInfo";
 import AddFolder from "./components/AddFolder";
 import MyContext from "./components/MyContext";
-import AddNote from "./components/AddNote/AddNote"
+import AddNote from "./components/AddNote/AddNote";
+import NotesByFolder from "./components/NotesContainer/Folders/NotesByFolder"
 import "./App.css";
 
 const { API_ENDPOINT } = require('./config')
@@ -35,8 +36,8 @@ class App extends React.Component {
 
   fetchNotesByFolderId = () => {
     const { folder_id } = this.state;
-    const url = folder_id ? `${API_ENDPOINT}/folder/${folder_id}` : ``;
-    fetch(`${API_ENDPOINT}/notes${url}`)
+     const url = folder_id  ? `${API_ENDPOINT}/folder/${folder_id}` : ``;
+    fetch(`${API_ENDPOINT}/notes/${url}`)
       .then((resp) => {
         if (!resp.ok)
           return resp.json().then(e => Promise.reject(e));
@@ -125,7 +126,7 @@ class App extends React.Component {
 
        { <Router>
         <Route path="/" exact component={NotesContainer} />
-          <Route path="/folder/:id" exact component={NotesContainer} />
+          <Route path="/folder/:id" exact component={NotesByFolder} />
           <Route path="/note/:noteId" exact component={NoteInfo} />
           <Route path="/folder/add" exact component={AddFolder} />
           <Route path="/notes/add" exact component={AddNote} />
