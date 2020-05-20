@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
+const { API_ENDPOINT } = require('../../config')
+
 class NotesByFolder extends Component {
   constructor(props) {
     super(props);
@@ -12,22 +14,17 @@ class NotesByFolder extends Component {
   fetchNotesByFolderId = () => {
     const folder_id = this.props.match.params.id;
     console.log(folder_id)
-    fetch(`/notes/folder/${folder_id}`)
-      .then((resp) => {
-        if (!resp.ok)
-          return resp.json().then(e => Promise.reject(e));
-        return resp.json();
+    fetch(`${API_ENDPOINT}/notes/folder/${folder_id}`)
+    .then(res => res.json())
+    .then(res => {
+      this.setState({
+        notes: res
       })
-      .then(data => {
-        this.setState({
-          notes: data
-        })
-
-      })
-      .catch(error => {
-        console.error({ error });
-      });
-  }
+    })
+    .catch((error => {
+      console.error(error);
+    }));
+}
 
   componentDidUpdate(prevProps) {
     if (this.props.match.params.id.folder_id !== prevProps.match.params.id.folder_id) {
@@ -58,8 +55,5 @@ class NotesByFolder extends Component {
   }
 }
 
-NotesByFolder.propTypes = {
-
-};
 
 export default NotesByFolder;
