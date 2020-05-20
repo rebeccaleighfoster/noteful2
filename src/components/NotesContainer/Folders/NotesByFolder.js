@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
-const { API_ENDPOINT } = require('../../config')
+const { API_ENDPOINT } = require('../../../config')
 
 class NotesByFolder extends Component {
   constructor(props) {
